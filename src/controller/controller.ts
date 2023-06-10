@@ -5,14 +5,13 @@ import { prismaClient } from "../prismaClient";
 export class CreateController {
     async handle(request: Request, response: Response) {
 
-        const { email, name } = request.body;
+        const { nome } = request.body;
 
         try {
 
             const user = await prismaClient.user.create({
                 data: {
-                    email,
-                    name
+                    nome
                 },
             });
 
@@ -29,14 +28,13 @@ export class CreateController {
 export class FindController {
     async handle(request: Request, response: Response) {
 
-        const { email, name } = request.body;
+        const { id } = request.body;
 
         try {
 
             const user = await prismaClient.user.findMany({
                 where: {
-                    email,
-                    name
+                    id
                 },
             });
 
@@ -53,17 +51,16 @@ export class FindController {
 export class UpdateController {
     async handle(request: Request, response: Response) {
 
-        const { email, name } = request.body;
+        const { id, nome } = request.body;
 
         try {
 
             const user = await prismaClient.user.update({
                 where: {
-                    email
+                    id
                 },
                 data: {
-                    email,
-                    name
+                    nome
                 }
             });
 
@@ -80,13 +77,13 @@ export class UpdateController {
 export class DeleteController {
     async handle(request: Request, response: Response) {
 
-        const { email } = request.body;
+        const { id } = request.body;
 
         try {
 
             const user = await prismaClient.user.delete({
                 where: {
-                    email
+                    id
                 }
             });
 
